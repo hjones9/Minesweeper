@@ -37,8 +37,7 @@ public class MineSweeperModel extends Application {
 //
 //        button.setStyle("-fx-background-color: #090a0c ");
 //        button.setMinWidth(200);
-        Image image = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png");
-        ImageView imageView = new ImageView(image);
+        
         ToggleButton TB = new ToggleButton("pizza");
 
         TB.setMaxWidth(100);
@@ -71,7 +70,7 @@ public class MineSweeperModel extends Application {
 
         Scene scene = new Scene(root, 600, 600);
         root.getChildren().add(grid);
-        primaryStage.setTitle("MineSweeoer");
+        primaryStage.setTitle("MineSweeper");
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -80,7 +79,9 @@ public class MineSweeperModel extends Application {
             get.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    get.setStyle("-fx-background-color: #ff0ff0");
+                    Image image = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png");
+        ImageView imageView = new ImageView(image);
+                    get.setGraphic(imageView);
 
                 }
 
