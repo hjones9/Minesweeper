@@ -61,7 +61,7 @@ public class MineSweeperModel extends Application {
         for (int i = 0; i <= 10; i++) {
             for (int x = 0; x <= 10; x++) {
                 Button button = new Button();
-                button.setMinWidth(20);
+                button.setMinWidth(30);
                 grid.add(button, i, x);
                 list.add(button);
             }
@@ -74,13 +74,14 @@ public class MineSweeperModel extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < list.size(); i++) {
             Button get = list.get(i);
             get.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     Image image = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png");
-        ImageView imageView = new ImageView(image);
+                    
+                    ImageView imageView = new ImageView(image);
                     get.setGraphic(imageView);
 
                 }
