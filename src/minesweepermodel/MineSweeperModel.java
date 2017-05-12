@@ -5,8 +5,6 @@
  */
 package minesweepermodel;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -15,11 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -28,44 +23,13 @@ import javafx.stage.Stage;
  */
 public class MineSweeperModel extends Application {
 
-    //Matrix? lots of boxes?
     @Override
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage) throws Exception {
 
-//        Button button = new Button();
-//        button.setText("I do nothing.");
-//
-//        button.setStyle("-fx-background-color: #090a0c ");
-//        button.setMinWidth(200);
-        
-        ToggleButton TB = new ToggleButton("pizza");
+        Grid make = new Grid();
+        GridPane grid = make.getGrid();
+        List<Button> list = make.getList();
 
-        TB.setMaxWidth(100);
-
-        List<Button> list = new ArrayList<>();
-
-        int count = 0;
-
-//        for(int i = 0; i<9; i++){
-//        ToggleButton another = new ToggleButton("pizza", imageView);
-//        count++;
-//        another.setMaxSize(100, 100);
-//        list.add(another);
-//        
-//        }
-        VBox hbox = new VBox();
-
-        hbox.getChildren().addAll(TB);
-
-        GridPane grid = new GridPane();
-        for (int i = 0; i <= 10; i++) {
-            for (int x = 0; x <= 10; x++) {
-                Button button = new Button();
-                button.setMinWidth(30);
-                grid.add(button, i, x);
-                list.add(button);
-            }
-        }
         StackPane root = new StackPane();
 
         Scene scene = new Scene(root, 600, 600);
@@ -73,14 +37,14 @@ public class MineSweeperModel extends Application {
         primaryStage.setTitle("MineSweeper");
         primaryStage.setScene(scene);
         primaryStage.show();
-
+       
         for (int i = 0; i < list.size(); i++) {
             Button get = list.get(i);
             get.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     Image image = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png");
-                    
+
                     ImageView imageView = new ImageView(image);
                     get.setGraphic(imageView);
 
@@ -88,6 +52,16 @@ public class MineSweeperModel extends Application {
 
             });
         }
+        boolean done = true;
+        if (/* all squares marked*/done) {
+            String message = "Congratulations you won!";
+            Stage stage = new Stage();
+            WinOrLose won = new WinOrLose();
+            won.run(stage, message);
+        } else if (/*bomb selected*/done) {
+
+        }
+
     }
 
     /**
@@ -95,6 +69,7 @@ public class MineSweeperModel extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
     }
 
 }
