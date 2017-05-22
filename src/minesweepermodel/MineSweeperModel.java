@@ -30,6 +30,9 @@ public class MineSweeperModel extends Application {
         GridPane grid = make.getGrid();
         List<Button> list = make.getList();
 
+        Bomb bomb = new Bomb();
+        List<Button> bombList = bomb.bomb(list);
+        
         StackPane root = new StackPane();
 
         Scene scene = new Scene(root, 600, 600);
@@ -37,13 +40,14 @@ public class MineSweeperModel extends Application {
         primaryStage.setTitle("MineSweeper");
         primaryStage.setScene(scene);
         primaryStage.show();
-       
-        for (int i = 0; i < list.size(); i++) {
-            Button get = list.get(i);
+
+        for (int i = 0; i < bombList.size(); i++) {
+            Button get = bombList.get(i);
+            
             get.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    Image image = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png");
+                    Image image = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png", 50, 50, true, true);
 
                     ImageView imageView = new ImageView(image);
                     get.setGraphic(imageView);
