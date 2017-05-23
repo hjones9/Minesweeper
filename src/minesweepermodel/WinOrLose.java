@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -48,10 +49,18 @@ public class WinOrLose {
             }
         });
 
-        HBox hbox = new HBox(btn, button);
+         btn.setLayoutX(70);
+        btn.setLayoutY(130);
         
-        StackPane root = new StackPane();
-        root.getChildren().addAll(hbox, text);
+        button.setLayoutX(190);
+        button.setLayoutY(130);
+        
+        text.setLayoutX(80);
+        text.setLayoutY(80);
+        
+        Pane root = new Pane();
+        root.getChildren().addAll(button, btn, text);
+
 
         Scene scene = new Scene(root, 300, 250);
 
