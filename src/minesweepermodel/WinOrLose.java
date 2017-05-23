@@ -49,7 +49,7 @@ public class WinOrLose {
             }
         });
 
-         btn.setLayoutX(70);
+        btn.setLayoutX(70);
         btn.setLayoutY(130);
         
         button.setLayoutX(190);
