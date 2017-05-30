@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -23,7 +24,8 @@ import javafx.stage.Stage;
  */
 public class WinOrLose {
 
-    public void run(Stage primaryStage, String message) throws Exception {
+    public void run(Stage primaryStage, String message, GridPane grid) throws Exception {
+        
         Text text = new Text(message);
         Button btn = new Button();
         btn.setText("Play Again");
@@ -67,6 +69,7 @@ public class WinOrLose {
         primaryStage.setTitle("Political Minesweeper");
         primaryStage.setScene(scene);
         primaryStage.show();
+        grid.setDisable(true);
     }
 
 }

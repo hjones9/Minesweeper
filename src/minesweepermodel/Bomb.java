@@ -8,23 +8,33 @@ package minesweepermodel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Button;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+ 
 /**
  *
  * @author Hailey.Jones
  */
 public class Bomb {
-
+ 
     List<Button> bombList = new ArrayList<>();
-
+ 
     List<Button> bomb(List<Button> list) {
         List<Integer> repeat = new ArrayList<>();
-
+ 
         for (int i = 0; i < 10; i++) {
             Random random = new Random();
+ 
             int x = random.nextInt(list.size() - 1) + 1;
-
+ 
             boolean again = false;
             if (i != 0) {
                 for (int check : repeat) {
@@ -42,4 +52,17 @@ public class Bomb {
         }
         return bombList;
     }
+
+    public void react(List<Button> bombList) {
+
+        for (Button itsABomb : bombList) {
+
+            Image image = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png", 50, 50, true, true);
+            ImageView imageView = new ImageView(image);
+
+            itsABomb.setGraphic(imageView);
+        }
+
+    }
+
 }

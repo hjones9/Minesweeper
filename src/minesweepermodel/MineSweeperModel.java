@@ -6,6 +6,8 @@
 package minesweepermodel;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -38,34 +40,49 @@ public class MineSweeperModel extends Application {
         List<Button> bombList = bomb.bomb(list);
 
         StackPane root = new StackPane();
-        boolean done = true;
 
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 1000, 1000);
         root.getChildren().add(grid);
         primaryStage.setTitle("MineSweeper");
         primaryStage.setScene(scene);
         primaryStage.show();
 
         for (int i = 0; i < bombList.size(); i++) {
-            Button get2 = bombList.get(i);
-            get2.setOnAction(new EventHandler<ActionEvent>() {
-                
+            Button itsABomb = bombList.get(i);
+            AtomicBoolean atomicReact = new AtomicBoolean(true);
+
+            itsABomb.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
                 @Override
-                public void handle(ActionEvent event) {
-                    Image image3 = new Image("http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png", 50, 50, true, true);
-                    ImageView imageView3 = new ImageView(image3);
-                    get2.setGraphic(imageView3);
+                public void handle(MouseEvent event) {
+
+                    if (event.getButton() == MouseButton.PRIMARY && atomicReact.get()) {
+                        bomb.react(bombList);
+                        String message = "You lost";
+                        Stage stage = new Stage();
+                        WinOrLose won = new WinOrLose();
+                        try {
+                            won.run(stage, message, grid);
+                        } catch (Exception ex) {
+                            Logger.getLogger(MineSweeperModel.class.getName()).log(Level.SEVERE, null, ex);
+
+                        }
+
+                    }
+
                 }
             });
+
         }
 
         for (int i = 0; i < list.size(); i++) {
             Button get = list.get(i);
+
             get.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
 
-                    Image image2 = new Image("https://lh3.googleusercontent.com/quaYoevP5DEiig0JnRqjpYJ_T15T8as9ydPnMYOjRhGohBy8Lq40hIUEygXTF2o6XjpSAbE=s85", 50, 50, true, true);
+                    Image image2 = new Image("https://lh3.googleusercontent.com/quaYoevP5DEiig0JnRqjpYJ_T15T8as9ydPnMYOjRhGohBy8Lq40hIUEygXTF2o6XjpSAbE=s85", 25, 25, true, true);
                     ImageView imageView2 = new ImageView(image2);
 
                     if (event.getButton() == MouseButton.SECONDARY) {
@@ -75,22 +92,6 @@ public class MineSweeperModel extends Application {
             });
         }
 
-        done = false;
-
-        if (/* all squares marked*/done) {
-            String message = "Congratulations you won!";
-            Stage stage = new Stage();
-            WinOrLose won = new WinOrLose();
-            won.run(stage, message);
-           
-
-        } else if (!done) {
-            String message = "You lost";
-            Stage stage = new Stage();
-            WinOrLose won = new WinOrLose();
-            won.run(stage, message);
-            
-        }
     }
 
     /**
