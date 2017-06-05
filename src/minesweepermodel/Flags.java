@@ -17,24 +17,25 @@ public class Flags {
  
     public boolean run(AtomicInteger atomicCount, AtomicBoolean atomicReact, Button get, MouseEvent event) {
  
-        Image image2 = new Image("https://lh3.googleusercontent.com/quaYoevP5DEiig0JnRqjpYJ_T15T8as9ydPnMYOjRhGohBy8Lq40hIUEygXTF2o6XjpSAbE=s85", 50, 50, true, true);
+         Image image2 = new Image("https://lh3.googleusercontent.com/Pgu26IbOs6o7GWvlbbj3jC93kD0J3kySGtGQ0GcpLvvkwC3BimXSZ26uWvuEDl5j6ssv=s85", 50, 50, true, true);
         ImageView imageView2 = new ImageView(image2);
-        Image image3 = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/President_Barack_Obama.jpg/220px-President_Barack_Obama.jpg", 50, 50, true, true);
-        ImageView imageView3 = new ImageView(image3);
+        
         
         if (event.getButton() == MouseButton.SECONDARY) {
             atomicReact.set(false);
             atomicCount.incrementAndGet();
-            if (atomicCount.get() == 1) {
-                    
-                get.setGraphic(imageView3);
+            if (atomicCount.get() == 2) {
+ 
+                get.setGraphic(null);
+                atomicCount.set(0);
                 atomicReact.set(true);
  
-            } else if(atomicCount.get() == 2) {
-                atomicCount.set(0);
+            } else {
+                get.setGraphic(imageView2);
  
             }
         }
+
        return atomicReact.get();
         
     }
