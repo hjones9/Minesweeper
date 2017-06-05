@@ -47,6 +47,7 @@ public class MineSweeperModel extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        
         for (int i = 0; i < bombList.size(); i++) {
             Button itsABomb = bombList.get(i);
             AtomicBoolean atomicReact = new AtomicBoolean(true);
@@ -74,22 +75,23 @@ public class MineSweeperModel extends Application {
             });
 
         }
-
+        int count = 0;
+ 
         for (int i = 0; i < list.size(); i++) {
+            AtomicInteger atomicCount = new AtomicInteger(count);
+            AtomicBoolean atomicReact = new AtomicBoolean(true);
             Button get = list.get(i);
-
+ 
             get.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-
-                    Image image2 = new Image("https://lh3.googleusercontent.com/quaYoevP5DEiig0JnRqjpYJ_T15T8as9ydPnMYOjRhGohBy8Lq40hIUEygXTF2o6XjpSAbE=s85", 25, 25, true, true);
-                    ImageView imageView2 = new ImageView(image2);
-
-                    if (event.getButton() == MouseButton.SECONDARY) {
-                        get.setGraphic(imageView2);
-                    }
+                    Flags flag = new Flags();
+                    boolean set = flag.run(atomicCount, atomicReact, get, event);
+                    atomicReact.set(set);
                 }
+ 
             });
+
         }
 
     }
